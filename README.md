@@ -28,7 +28,6 @@ The application accepts the following inputs:
    - Focus on particular skills - It tells the LLM to focus on any particular skill of the user.
    - Change language style - User can suggest any particular language style or type 'new' to 
      create a new style.
-   - cover letter length - It helps to restrict the word count of the cover letter
    - model creativity - Values between 0 and 1 with increasing creativity. It is the temperature 
      parameter used in LLMs.
    - others - User can suggest any other preference.
@@ -50,6 +49,14 @@ This project harnesses the capabilities of Large Language Models (LLMs) and inte
 [app.py](app.py) This module helps to create UI and select various options.
 
 [helper.py](helper) This module helps to scrape the LinkedIn job posting, convert pdf to documents, and text to documents.
+
+[Dockerfile](Dockerfile) This defines instructions to build a Docker image with necessary dependencies.
+
+[docker-compose.yml](docker-compose.yml)  Configures multi-container Docker applications in a single file.
+
+[kubernetes/deployment.yaml](kubernetes/deployment.yaml) Specifies deployment settings for Kubernetes applications.
+
+[kubernetes/service.yaml](kubernetes/service.yaml) Defines networking and access settings for Kubernetes services.
 
 [requirements.txt](requirements.txt) This file contains the necessary packages required for this project.
 
@@ -99,10 +106,25 @@ python3 api.py
 streamlit run app.py
 ```
 
+* Another way is to use docker image 
+```bash
+docker-compose build
+docker-compose up
+```
+
 ## Usage
-To get started, follow these steps:
+To get started, follow these steps on UI:
 
 1. Paste the job description or LinkedIn url
 2. Paste the resume or upload a pdf
-3. Select customised options 
+3. Select customised options
+4. Click on submit button
+
+## Sample Output
+
+<img width="748" alt="Screenshot 2023-12-09 at 2 27 56 AM" src="https://github.com/avinash-deyyam/COVER_LETTER_GENERATOR/assets/45258206/f42b90d0-6d21-4940-b71c-365bb4a6a72d">
+
+<img width="733" alt="Screenshot 2023-12-09 at 2 28 09 AM" src="https://github.com/avinash-deyyam/COVER_LETTER_GENERATOR/assets/45258206/b5594748-607b-412c-9b77-0e4d95ccf53c">
+
+
 
