@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coverletter-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: coverletter-app
+  template:
+    metadata:
+      labels:
+        app: coverletter-app
+    spec:
+      containers:
+      - name: coverletter-app
+        image: avinashdeyyam/coverletter:latest
+        ports:
+        - containerPort: 8080

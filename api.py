@@ -17,7 +17,7 @@ async def create_upload_file(file: UploadFile = File(...), json_data: str = Form
     content = await file.read()
     data = ast.literal_eval(json_data)
     cl['result'] = get_cover_letter(data, content)
-    return json.dumps(cl)   
+    return json.dumps(cl) 
 
-if __name__=="__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8080)
+# if __name__=="__main__":
+#     uvicorn.run(app, host="0.0.0.0", port=8080)
