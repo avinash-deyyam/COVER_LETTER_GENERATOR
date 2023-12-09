@@ -59,4 +59,10 @@ def get_cover_letter(json_data, file):
     question = f"""Craft a personalized cover letter addressing the job requirements from the job posting and candidate's resume. Make it conversational 
     in tone. {append_text} Lastly, conclude the letter by filling in the writer's name from the resume"""
     
+    question = question.split(' ')
+    if len(question) > 3500:
+        question = " ".join(question[:3500])
+    else:
+        question = " ".join(question)
+    
     return coverletter_qa.run(question)

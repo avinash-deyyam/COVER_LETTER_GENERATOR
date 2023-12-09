@@ -73,7 +73,7 @@ def main():
         else:
             files = {"file": ("file.pdf", '', "application/pdf")}
             data = {"json_data": str(json_data)}
-            response = requests.post(url ,files={'file': file} , data=data)
+            response = requests.post(url ,files=files , data=data)
 
         # Print the response
         output = response.json()
