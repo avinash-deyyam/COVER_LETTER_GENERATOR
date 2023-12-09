@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 openai_api_key = os.getenv("OPENAI_API_KEY")
 
-def get_cover_letter(json_data):
+def get_cover_letter(json_data, file):
     temperature = 0.7
     append_text = ''
     for key in json_data:
@@ -23,7 +23,7 @@ def get_cover_letter(json_data):
             if json_data[key][0] == 'Paste Resume':
                 resume_doc = text_to_doc_splitter(json_data[key][1])
             else:
-                resume_doc = load_pdf(json_data[key][1])
+                resume_doc = load_pdf(file)
                 
         elif key in ['focus on particular projects/roles on resume','focus on particular points on job description', 'focus on particular skills']:
             append_text += key + ' such as ' + json_data[key] + '. '
@@ -51,7 +51,7 @@ def get_cover_letter(json_data):
     vectordb = Chroma.from_documents(documents, embedding=OpenAIEmbeddings(openai_api_key = openai_api_key))
 
     coverletter_qa = RetrievalQA.from_chain_type(
-        ChatOpenAI(temperature=0.7, model_name='gpt-3.5-turbo', openai_api_key = openai_api_key),
+        ChatOpenAI(temperature= temperature, model_name='gpt-3.5-turbo', openai_api_key = openai_api_key),
         retriever=vectordb.as_retriever(search_kwargs={'k': 6}),
         chain_type="stuff",
     )

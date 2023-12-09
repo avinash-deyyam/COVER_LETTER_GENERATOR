@@ -1,5 +1,12 @@
 import streamlit as st
-from main import get_cover_letter
+import requests
+import json
+import os
+from dotenv import load_dotenv
+import ast
+
+load_dotenv()
+host_address = os.getenv("host_address")
 
 def main():
     st.title('Cover Letter Generator')
@@ -51,8 +58,27 @@ def main():
       submitted = st.form_submit_button('Submit')
       
     if submitted:
-        output = get_cover_letter(json_data)
-        st.write(output)
+        
+        # URL of your FastAPI endpoint
+        url = f"http://{host_address}/cover_letter"  # Replace with your API endpoint URL
+
+        # Send POST request to the FastAPI endpoint
+        if json_data['resume'][0] == 'Upload PDF':
+            file_content = json_data['resume'][1].read()
+            json_data['resume'][1] = ''
+            files = {"file": ("file.pdf", file_content, "application/pdf")}
+            data = {"json_data": str(json_data)}
+            response = requests.post(url ,files=files , data=data)
+            
+        else:
+            files = {"file": ("file.pdf", '', "application/pdf")}
+            data = {"json_data": str(json_data)}
+            response = requests.post(url ,files={'file': file} , data=data)
+
+        # Print the response
+        output = response.json()
+        output = ast.literal_eval(output)
+        st.write(output['result'])
         
             
 if __name__ == "__main__":

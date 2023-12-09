@@ -6,3 +6,4 @@ bs4==0.0.1
 chromadb==0.3.26
 requests==2.31.0
 tiktoken==0.4.0
+python-multipart

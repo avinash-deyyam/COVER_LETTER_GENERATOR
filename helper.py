@@ -2,6 +2,7 @@ from langchain.text_splitter import CharacterTextSplitter, RecursiveCharacterTex
 from PyPDF2 import PdfReader
 from bs4 import BeautifulSoup
 import requests
+import io
 
 def split_text_documents(docs: list):
     text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=20)
@@ -14,7 +15,7 @@ def text_to_doc_splitter(text: str):
     return document
 
 def load_pdf(pdf):
-    pdf_reader = PdfReader(pdf)
+    pdf_reader = PdfReader(io.BytesIO(pdf))
     text = ""
     for page in pdf_reader.pages:
         text += page.extract_text()
