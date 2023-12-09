@@ -5,12 +5,12 @@ import requests
 import io
 
 def split_text_documents(docs: list):
-    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=20)
+    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=5)
     documents = text_splitter.split_documents(docs)
     return documents
 
 def text_to_doc_splitter(text: str):
-    doc_splitter = RecursiveCharacterTextSplitter(chunk_size = 10000, chunk_overlap  = 100, length_function = len, add_start_index = True,)
+    doc_splitter = RecursiveCharacterTextSplitter(chunk_size = 5000, chunk_overlap  = 20, length_function = len, add_start_index = True,)
     document = doc_splitter.create_documents([text])
     return document
 

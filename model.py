@@ -28,8 +28,8 @@ def get_cover_letter(json_data, file):
         elif key in ['focus on particular projects/roles on resume','focus on particular points on job description', 'focus on particular skills']:
             append_text += key + ' such as ' + json_data[key] + '. '
         
-        elif key == 'cover letter length':
-            append_text += 'restrict ' + key + ' to ' + json_data[key] + '. '
+        # elif key == 'cover letter length':
+        #     append_text += 'Strictly limit cover letter word length' + ' to ' + json_data[key] + '. '
             
         elif key in ['change the format of cover letter', 'change language style']:
             append_text += key + ' to ' + json_data[key] + '. '
@@ -52,16 +52,16 @@ def get_cover_letter(json_data, file):
 
     coverletter_qa = RetrievalQA.from_chain_type(
         ChatOpenAI(temperature= temperature, model_name='gpt-3.5-turbo', openai_api_key = openai_api_key),
-        retriever=vectordb.as_retriever(search_kwargs={'k': 6}),
+        retriever=vectordb.as_retriever(search_kwargs={'k': 3}),
         chain_type="stuff",
     )
 
-    question = f"""Craft a personalized cover letter addressing the job requirements from the job posting and candidate's resume. Make it conversational 
-    in tone. {append_text} Lastly, conclude the letter by filling in the writer's name from the resume"""
+    question = f"""Generate a concise, conversational cover letter for a job. Address the job requirements and candidate's qualifications briefly. Ensure the letter is engaging and ends with the writer's name from the resume. {append_text}"""
+    print(question)
     
     question = question.split(' ')
-    if len(question) > 3500:
-        question = " ".join(question[:3500])
+    if len(question) > 3800:
+        question = " ".join(question[:3800])
     else:
         question = " ".join(question)
     

@@ -37,7 +37,7 @@ def main():
 
     options = ["focus on particular projects/roles on resume", "focus on particular points on job description", 
               "change the format of cover letter", "focus on particular skills",
-              "change language style", "cover letter length","model creativity", "others"]
+              "change language style","model creativity", "others"]
 
     selected_options = st.multiselect("Select options for customised outputs", options)
 
