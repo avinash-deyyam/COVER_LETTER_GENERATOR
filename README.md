@@ -112,6 +112,8 @@ docker-compose build
 docker-compose up
 ```
 
+Note: Docker and kubernetes achieves the scalability of the application.  
+
 ## Usage
 To get started, follow these steps on UI:
 
