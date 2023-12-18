@@ -56,12 +56,12 @@ def get_cover_letter(json_data, file):
         chain_type="stuff",
     )
 
-    question = f"""Generate a concise, conversational cover letter for a job. Address the job requirements and candidate's qualifications briefly. Ensure the letter is engaging and ends with the writer's name from the resume. {append_text}"""
+    question = f"""Generate a concise, conversational cover letter for a job. Address the job requirements and candidate's qualifications briefly. Ensure the letter is engaging and ends with the candidate's name from the resume. {append_text}"""
     print(question)
     
     question = question.split(' ')
-    if len(question) > 3800:
-        question = " ".join(question[:3800])
+    if len(question) > 2500:
+        question = " ".join(question[:2500])
     else:
         question = " ".join(question)
     
